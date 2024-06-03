@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: block-list
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data\
+    restart: unless-stopped
+
+  pg_admin:
+    depends_on:
+      - postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'admin@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: 'admin'
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin:
