@@ -1,8 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-import { PrismaClient } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
-const prisma = new PrismaClient();
+import { AppService } from './app.service';
+import { DbService } from './db/db.service';
 
 class HelloWorldDto {
   @ApiProperty()
@@ -11,11 +10,14 @@ class HelloWorldDto {
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly dbService: DbService,
+  ) {}
 
   @Get()
   async getHello(): Promise<HelloWorldDto> {
-    const users = await prisma.user.findMany({});
+    const users = await this.dbService.user.findMany({});
     console.log('✎ - users:', users);
     return { message: this.appService.getHello() };
   }
