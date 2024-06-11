@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { $Enums } from '@prisma/client';
-import { IsIn } from 'class-validator';
+import { IsIn, IsOptional } from 'class-validator';
 
 export class BlockItemDto {
   @ApiProperty()
@@ -30,6 +30,12 @@ export class BlockListDto {
 
   @ApiProperty({ type: [BlockItemDto] })
   items: BlockItemDto[];
+}
+
+export class BlockListQueryDto {
+  @ApiProperty({ nullable: true })
+  @IsOptional()
+  q?: string;
 }
 
 export class AddBlockItemDto {
