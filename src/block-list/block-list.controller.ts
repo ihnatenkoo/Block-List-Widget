@@ -7,7 +7,6 @@ import {
   ParseIntPipe,
   Post,
   Query,
-  Session,
   UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
