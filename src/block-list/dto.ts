@@ -33,7 +33,7 @@ export class BlockListDto {
 }
 
 export class BlockListQueryDto {
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ required: false })
   @IsOptional()
   q?: string;
 }

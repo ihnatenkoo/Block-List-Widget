@@ -7,5 +7,6 @@ import { BlockListService } from './block-list.service';
   imports: [DbModule],
   controllers: [BlockListController],
   providers: [BlockListService],
+  exports: [BlockListService],
 })
 export class BlockListModule {}
